@@ -30,13 +30,13 @@ class CreateNote extends Component {
         <input
           className="create-note_input"
           type="text"
-          placeholder="Titulo"
+          placeholder="Title"
           onChange={this._handleTitle.bind(this)}
         />
         <textarea
           className="create-note_input"
           rows={15}
-          placeholder="Escreva sua nota"
+          placeholder="Write a note here"
           onChange={this._handleText.bind(this)}
         />
         <button className="create-note_input create-note_submit">
