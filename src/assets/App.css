@@ -1,0 +1,11 @@
+.content {
+  display: flex;
+}
+
+:root {
+  --primary: #58a4b0;
+  --secundary: #373f51;
+  --secundary-active: #cccccc;
+  --background: #ffffff;
+  --background-details: #ececec;
+}
