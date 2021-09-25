@@ -1,15 +1,21 @@
 import React, { Component } from "react";
+import { ReactComponent as Delete } from "../../assets/img/delete.svg";
 import "./Note.css";
 
 class Note extends Component {
+  _delete() {
+    this.props.deleteNote(this.props.index);
+  }
+
   render() {
     return (
-        <section className="note">
-          <header className="note_header">
-            <h3 className="note_title">{this.props.title}</h3>
-          </header>
-          <p className="note_text">{this.props.text}</p>
-        </section>
+      <section className="note">
+        <header className="note_header">
+          <h3 className="note_title">{this.props.title}</h3>
+          <Delete onClick={this._delete.bind(this)} />
+        </header>
+        <p className="note_text">{this.props.text}</p>
+      </section>
     );
   }
 }

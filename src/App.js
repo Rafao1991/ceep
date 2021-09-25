@@ -1,8 +1,8 @@
-import './assets/index.css';
-import './assets/App.css';
 import NoteList from './components/noteList/NoteList';
 import CreateNote from './components/createNote/CreateNote';
 import React, { Component } from 'react';
+import './assets/index.css';
+import './assets/App.css';
 
 class App extends Component {
 
@@ -14,17 +14,24 @@ class App extends Component {
   }
 
   createNote(title, text) {
-    const newState = {
+    this.setState({
       notes: [...this.state.notes, { title, text }]
-    }
-    this.setState(newState);
+    });
+  }
+
+  deleteNote(index) {
+    let notes = this.state.notes;
+    notes.splice(index, 1);
+    this.setState({
+      notes: notes
+    });
   }
 
   render() {
     return (
       <section className="content">
         <CreateNote createNote={this.createNote.bind(this)} />
-        <NoteList noteList={this.state.notes} />
+        <NoteList noteList={this.state.notes} deleteNote={this.deleteNote.bind(this)} />
       </section>
     );
   }
