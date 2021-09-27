@@ -11,10 +11,11 @@ class Note extends Component {
     return (
       <section className="note">
         <header className="note_header">
-          <h3 className="note_title">{this.props.title}</h3>
+          <h3 className="note_title">Title: {this.props.title}</h3>
+          <h4 className="note_title">Category: {this.props.category}</h4>
           <Delete onClick={this._delete.bind(this)} />
         </header>
-        <p className="note_text">{this.props.text}</p>
+        <p className="note_text">Text: {this.props.text}</p>
       </section>
     );
   }

@@ -6,6 +6,7 @@ class CreateNote extends Component {
     super(props);
     this.title = "";
     this.text = "";
+    this.category = "";
   }
 
   _handleTitle(event) {
@@ -18,15 +19,26 @@ class CreateNote extends Component {
     this.text = event.target.value;
   }
 
+  _handleCategory(event) {
+    event.stopPropagation();
+    this.category = event.target.value;
+  }
+
   _createNote(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.props.createNote(this.title, this.text);
+    this.props.createNote(this.title, this.text, this.category);
   }
 
   render() {
     return (
       <form className="create-note" onSubmit={this._createNote.bind(this)}>
+        <select className="create-note_input" onChange={this._handleCategory.bind(this)}>
+          <option>none</option>
+          {this.props.categoryList.map((category) => {
+            return <option>{category}</option>;
+          })}
+        </select>
         <input
           className="create-note_input"
           type="text"

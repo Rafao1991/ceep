@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Note from "../note/Note";
+import Note from "../note";
 import "./NoteList.css";
 
 class NoteList extends Component {
@@ -13,6 +13,7 @@ class NoteList extends Component {
                 index={index}
                 title={note.title}
                 text={note.text}
+                category={note.category}
                 deleteNote={this.props.deleteNote}
               />
             </li>
