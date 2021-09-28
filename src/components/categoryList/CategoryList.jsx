@@ -5,10 +5,16 @@ class CategoryList extends Component {
   constructor() {
     super();
     this.state = { categories: [] };
+
+    this._onCategoriesChange = this._onCategoriesChange.bind(this);
   }
 
   componentDidMount() {
-    this.props.categoryList.subscribe(this._onCategoriesChange.bind(this));
+    this.props.categories.subscribe(this._onCategoriesChange);
+  }
+
+  componentWillUnmount() {
+    this.props.categories.unsubscribe(this._onCategoriesChange);
   }
 
   _onCategoriesChange(categories) {
@@ -19,8 +25,8 @@ class CategoryList extends Component {
     event.stopPropagation();
     if (event.key === "Enter") {
       const value = event.target.value.toLowerCase();
-      if (!this.props.categoryList.getCategories().includes(value)) {
-        this.props.categoryList.addCategory(value);
+      if (!this.state.categories.includes(value)) {
+        this.props.categories.addCategory(value);
       }
     }
   }
@@ -29,7 +35,7 @@ class CategoryList extends Component {
     return (
       <section className="category-list">
         <ul className="category-list_list">
-          {this.props.categoryList.getCategories().map((category, index) => {
+          {this.state.categories.map((category, index) => {
             return (
               <li key={index} className="category-list_item">
                 {category}

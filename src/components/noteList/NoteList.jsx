@@ -6,10 +6,16 @@ class NoteList extends Component {
   constructor() {
     super();
     this.state = { notes: [] };
+
+    this._onNotesChange = this._onNotesChange.bind(this);
   }
 
   componentDidMount() {
-    this.props.notes.subscribe(this._onNotesChange.bind(this));
+    this.props.notes.subscribe(this._onNotesChange);
+  }
+
+  componentWillUnmount() {
+    this.props.notes.unsubscribe(this._onNotesChange);
   }
 
   _onNotesChange(notes) {

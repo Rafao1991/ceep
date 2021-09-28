@@ -27,6 +27,10 @@ class Notes {
             callback(this._value);
         });
     }
+
+    unsubscribe(callback) {
+        this._subscribers = this._subscribers.filter(c => c !== callback);
+    }
 }
 
 export default Notes;

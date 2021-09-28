@@ -8,10 +8,16 @@ class CreateNote extends Component {
     this.text = "";
     this.category = "";
     this.state = { categories: [] };
+
+    this._onCategoriesChange = this._onCategoriesChange.bind(this);
   }
 
   componentDidMount() {
-    this.props.categories.subscribe(this._onCategoriesChange.bind(this));
+    this.props.categories.subscribe(this._onCategoriesChange);
+  }
+
+  componentWillUnmount() {
+    this.props.categories.unsubscribe(this._onCategoriesChange);
   }
 
   _onCategoriesChange(categories) {
