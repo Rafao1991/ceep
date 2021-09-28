@@ -7,6 +7,15 @@ class CreateNote extends Component {
     this.title = "";
     this.text = "";
     this.category = "";
+    this.state = { categories: [] };
+  }
+
+  componentDidMount() {
+    this.props.categories.subscribe(this._onCategoriesChange.bind(this));
+  }
+
+  _onCategoriesChange(categories) {
+    this.setState({ ...this.state, categories });
   }
 
   _handleTitle(event) {
@@ -33,10 +42,13 @@ class CreateNote extends Component {
   render() {
     return (
       <form className="create-note" onSubmit={this._createNote.bind(this)}>
-        <select className="create-note_input" onChange={this._handleCategory.bind(this)}>
+        <select
+          className="create-note_input"
+          onChange={this._handleCategory.bind(this)}
+        >
           <option>none</option>
-          {this.props.categoryList.map((category) => {
-            return <option>{category}</option>;
+          {this.state.categories.map((category, index) => {
+            return <option key={index}>{category}</option>;
           })}
         </select>
         <input
